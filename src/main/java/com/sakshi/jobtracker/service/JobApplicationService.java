@@ -31,4 +31,19 @@ public class JobApplicationService {
     public void deleteJobApplication(Long id) {
         jobApplicationRepository.deleteById(id);
     }
-}
+
+public Optional<JobApplication> updateJobApplication(
+        Long id, JobApplication updatedApplication) {
+
+    return jobApplicationRepository.findById(id)
+            .map(existingApplication -> {
+                existingApplication.setCompanyName(updatedApplication.getCompanyName());
+                existingApplication.setJobTitle(updatedApplication.getJobTitle());
+                existingApplication.setJobLink(updatedApplication.getJobLink());
+                existingApplication.setAppliedDate(updatedApplication.getAppliedDate());
+                existingApplication.setStatus(updatedApplication.getStatus());
+                existingApplication.setDescription(updatedApplication.getDescription());
+
+                return jobApplicationRepository.save(existingApplication);
+            });
+}}
