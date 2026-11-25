@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/applications")
@@ -18,7 +19,7 @@ public class JobApplicationController {
     }
 
     @PostMapping
-    public JobApplication createJobApplication(@RequestBody JobApplication jobApplication) {
+    public JobApplication createJobApplication( @Valid @RequestBody JobApplication jobApplication) {
         return jobApplicationService.saveJobApplication(jobApplication);
     }
 
@@ -36,7 +37,7 @@ public class JobApplicationController {
     @PutMapping("/{id}")
     public ResponseEntity<JobApplication> updateJobApplication(
             @PathVariable Long id,
-            @RequestBody JobApplication updatedApplication) {
+            @Valid @RequestBody JobApplication updatedApplication) {
 
         return jobApplicationService.updateJobApplication(id, updatedApplication)
                 .map(ResponseEntity::ok)

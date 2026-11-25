@@ -5,6 +5,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class JobApplication {
@@ -58,7 +59,10 @@ public class JobApplication {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
+	 @NotBlank(message = "Company name is required")
 	    private String companyName;
+
+	    @NotBlank(message = "Job title is required")
 	    private String jobTitle;
 	    private String jobLink;
 	    private LocalDate appliedDate;
